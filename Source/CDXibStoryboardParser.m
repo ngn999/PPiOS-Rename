@@ -91,6 +91,12 @@
         [attribute setStringValue:symbols[attribute.stringValue]];
     }
 
+    // Check if element contains a storyboardIdentifier
+    GDataXMLNode *identifier = [element attributeForName:@"storyboardIdentifier"];
+    if (identifier && symbols[identifier.stringValue]) {
+        [identifier setStringValue:symbols[identifier.stringValue]];
+    }
+
     // Check if element contains an outlet to obfuscate
     if ([element.name isEqualToString:@"outlet"]) {
         GDataXMLNode *propertyName = [element attributeForName:@"property"];
