@@ -380,8 +380,9 @@ static NSString *CDMachOFileMagicNumberDescription(uint32_t magic)
 {
     if (address == 0)
         return 0;
-
+    NSLog(@"===ty address in loadClassAtAddress3: 0x%08lx", address);
     CDLCSegment *segment = [self segmentContainingAddress:address];
+    NSLog(@"===ty address in loadClassAtAddress4: 0x%08lx", address);
     if (segment == nil) {
         NSLog(@"Error: Cannot find offset for address 0x%08lx in dataOffsetForAddress:", address);
         exit(5);

@@ -46,6 +46,7 @@
     CDMachOFileDataCursor *cursor = [[CDMachOFileDataCursor alloc] initWithSection:section];
     while ([cursor isAtEnd] == NO) {
         uint64_t val = [cursor readPtr];
+        NSLog(@"===ty load address: %08x", val);
         CDOCClass *aClass = [self loadClassAtAddress:val];
         if (aClass != nil) {
             if (aClass.isSwiftClass) {
@@ -53,6 +54,7 @@
                 return 1;
             }
             [self addClass:aClass withAddress:val];
+            NSLog(@"===ty loaded class: %@", aClass.name);
         }
     }
 
@@ -214,13 +216,13 @@
 {
     if (address == 0)
         return nil;
-    
+    NSLog(@"===ty address in loadClassAtAddress1: %08x", address);
     CDOCClass *class = [self classWithAddress:address];
     if (class)
         return class;
     
     //NSLog(@"%s, address=%016lx", __cmd, address);
-    
+    NSLog(@"===ty address in loadClassAtAddress2: %08x", address);
     CDMachOFileDataCursor *cursor = [[CDMachOFileDataCursor alloc] initWithFile:self.machOFile address:address];
     NSParameterAssert([cursor offset] != 0);
     
